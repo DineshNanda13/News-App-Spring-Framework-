@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <context:property-placeholder location = "classpath:companyInfo"/>
+
+	<!-- add entry to enable component scanning -->
+
+	<context:component-scan
+		base-package="com.newsApp" />
+		
+	<!-- extra service class -->
+	
+	<bean
+	id = "my_temp"
+	class = "com.newsApp.Montreal_temperature">
+	</bean>
+		
+	<bean
+	
+	id = "my_news"
+	class = "com.newsApp.world_News">
+	
+	<constructor-arg ref = "my_temp"></constructor-arg>
+	
+	</bean>
+	
+	<bean
+	
+	id = "my_entertainment_news"
+	class = "com.newsApp.Entertainment_News">
+	
+	<property name="temperature" ref = "my_temp"></property>
+	
+	<property name="companyName" value="${foo.companyName}"></property>
+	<property name="companyWebsite" value="${foo.companyWebsite}"></property>
+	
+	</bean>
+	
+	
+		
+</beans>
+
+
+
+
+
